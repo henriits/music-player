@@ -1,3 +1,5 @@
+import "./AudioPlayer.css";
+
 const AudioPlayer = () => {
     return (
         <div className="player-section">

@@ -1,0 +1,74 @@
+/* Mobile Layout */
+@media screen and (max-width: 768px) {
+    .content-container {
+        flex-direction: column;
+    }
+
+    .all-songs,
+    .favorites-section {
+        width: 100%; /* Full width on mobile */
+        margin: 10px 0;
+    }
+
+    .controls button {
+        width: 60px;
+        height: 60px;
+    }
+
+    .volume-control input[type="range"] {
+        width: 150px;
+    }
+
+    .player-section {
+        padding: 10px; /* Reduced padding for smaller screens */
+    }
+}
+
+/* Tablet Layout */
+@media screen and (min-width: 768px) and (max-width: 1024px) {
+    .all-songs,
+    .favorites-section {
+        width: calc(50% - 20px); /* Split the content into two columns */
+    }
+
+    .controls button {
+        width: 60px;
+        height: 60px;
+    }
+
+    .volume-control input[type="range"] {
+        width: 150px;
+    }
+
+    .player-section {
+        max-width: 100%; /* Ensure full width on tablet */
+    }
+}
+
+/* Desktop/Laptop Layout */
+@media screen and (min-width: 1024px) {
+    .content-container {
+        display: flex;
+        justify-content: space-between;
+        flex-direction: row;
+    }
+
+    .all-songs,
+    .favorites-section {
+        width: calc(50% - 20px);
+    }
+
+    .controls button {
+        width: 50px;
+        height: 50px;
+    }
+
+    .volume-control input[type="range"] {
+        width: 120px;
+    }
+
+    .player-section {
+        max-width: 100%;
+        padding: 20px;
+    }
+}

@@ -1,8 +1,9 @@
 import React from "react";
 import "./App.css";
-import AudioPlayer from "./components/AudioPlayer";
-import SongList from "./components/SongList";
-import Favourites from "./components/Favourites";
+import "./Responsive.css";
+import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
+import SongList from "./components/SongList/SongList";
+import Favourites from "./components/Favourites/Favourites";
 
 const App: React.FC = () => {
     return (
