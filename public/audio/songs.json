@@ -2,43 +2,37 @@
     {
         "title": "Amalgam",
         "artist": "Rockot",
-        "cover": "/audio/cover1.jpg",
-        "duration": "3:45",
+        "cover": "https://cdn.pixabay.com/audio/2024/06/17/18-00-00-760_200x200.jpg",
         "file": "/audio/amalgam-rockot.mp3"
     },
     {
         "title": "Flow",
         "artist": "Loksii",
-        "cover": "/audio/cover2.jpg",
-        "duration": "4:20",
+        "cover": "https://cdn.pixabay.com/audio/2024/05/24/15-24-57-666_200x200.png",
         "file": "/audio/flow-loksii.mp3"
     },
     {
         "title": "Movement",
         "artist": "Soul Prod Music",
-        "cover": "/audio/cover3.jpg",
-        "duration": "5:10",
+        "cover": "https://cdn.pixabay.com/audio/2024/04/07/12-31-59-477_200x200.jpg",
         "file": "/audio/movement-soulprodmusic.mp3"
     },
     {
-        "title": "Toegether We Thrive",
-        "artist": "Nesterouk",
-        "cover": "/audio/cover3.jpg",
-        "duration": "5:10",
-        "file": "/audio/together_we_thrive-nesterouk.mp3"
+        "title": "Bella Ciao (Background music) ",
+        "artist": "White_Records",
+        "cover": "https://cdn.pixabay.com/audio/2024/01/16/16-06-31-133_200x200.jpg",
+        "file": "/audio/bella-ciao.mp3"
     },
     {
         "title": "Tokyo Cafe",
         "artist": "Tvari",
-        "cover": "/audio/cover3.jpg",
-        "duration": "5:10",
+        "cover": "https://cdn.pixabay.com/audio/2023/07/22/02-53-18-138_200x200.jpg",
         "file": "/audio/tokyo_cafe-tvari.mp3"
     },
     {
         "title": "Unlock Me",
         "artist": "Prazkhanal",
-        "cover": "/audio/cover3.jpg",
-        "duration": "5:10",
+        "cover": "https://cdn.pixabay.com/audio/2023/05/07/10-53-53-122_200x200.png",
         "file": "/audio/unlock_me-prazkhanal.mp3"
     }
 ]
