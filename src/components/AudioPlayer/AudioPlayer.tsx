@@ -1,14 +1,7 @@
+import useFetchSongs from "@/hooks/useFetchSongs";
 import "./AudioPlayer.css";
 
 import React, { useRef, useState, useEffect } from "react";
-
-interface Song {
-    title: string;
-    artist: string;
-    cover: string;
-    duration: string;
-    file: string;
-}
 
 const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -16,26 +9,16 @@ const AudioPlayer: React.FC = () => {
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
     const [volume, setVolume] = useState(80);
-    const [songs, setSongs] = useState<Song[]>([]);
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
 
+    // Use custom hook to fetch songs
+    const { songs, loading, error } = useFetchSongs();
+
     useEffect(() => {
-        // Fetch the song data from songs.json
-        fetch("/audio/songs.json")
-            .then((response) => {
-                if (!response.ok) {
-                    throw new Error("Network response was not ok");
-                }
-                return response.json();
-            })
-            .then((data) => {
-                setSongs(data);
-                if (data.length > 0 && audioRef.current) {
-                    audioRef.current.src = data[0].file; // Set the source to the first song
-                }
-            })
-            .catch((error) => console.error("Fetch error:", error));
-    }, []);
+        if (songs.length > 0 && audioRef.current) {
+            audioRef.current.src = songs[0].file; // Set the source to the first song
+        }
+    }, [songs]);
 
     // Update the audio source when the song changes
     useEffect(() => {
@@ -103,6 +86,8 @@ const AudioPlayer: React.FC = () => {
 
     return (
         <div className="player-section">
+            {loading && <p>Loading songs...</p>}
+            {error && <p>Error fetching songs: {error}</p>}
             {songs.length > 0 && (
                 <div className="now-playing">
                     <img
