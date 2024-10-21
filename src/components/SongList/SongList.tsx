@@ -6,11 +6,21 @@ import "./SongList.css";
 
 const SongList: React.FC = () => {
     const { songs, loading, error } = useFetchSongs(); // Use custom hook
-    const { setCurrentSongIndex } = usePlayerStore(); // Get function to set current song index
+    const { setCurrentSongIndex, favorites, addFavorite, removeFavorite } =
+        usePlayerStore(); // Get functions to set current song index and manage favorites
 
     // Handle song click
     const handleSongClick = (index: number) => {
         setCurrentSongIndex(index); // Set the clicked song as the current song
+    };
+
+    // Handle favorite toggle
+    const handleFavoriteToggle = (index: number) => {
+        if (favorites.includes(index)) {
+            removeFavorite(index); // Remove from favorites
+        } else {
+            addFavorite(index); // Add to favorites
+        }
     };
 
     return (
@@ -33,10 +43,18 @@ const SongList: React.FC = () => {
                         <div className="song-info">
                             <h4>{song.title}</h4>
                             <p>{song.artist}</p>
-                            <span>{formatDuration(song.duration)}</span>{" "}
-                            {/* Pass the song duration */}
+                            <span>{formatDuration(song.duration)}</span>
                         </div>
-                        <button className="favorite-button">❤️</button>
+                        <button
+                            className="favorite-button"
+                            onClick={(e) => {
+                                e.stopPropagation(); // Prevent triggering the song click
+                                handleFavoriteToggle(index);
+                            }}
+                        >
+                            {favorites.includes(index) ? "❤️" : "🤍"}{" "}
+                            {/* Show filled heart if favorite */}
+                        </button>
                     </li>
                 ))}
             </ul>
