@@ -1,26 +1,19 @@
+// src/components/SongList/SongList.tsx
+
 import React from "react";
 import useFetchSongs from "../../hooks/useFetchSongs"; // Import your custom hook
 import usePlayerStore from "@/store/store"; // Import Zustand store
 import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
+import FavoriteButton from "../FavoriteButton/FavoriteButton"; // Import the FavoriteButton component
 import "./SongList.css";
 
 const SongList: React.FC = () => {
     const { songs, loading, error } = useFetchSongs(); // Use custom hook
-    const { setCurrentSongIndex, favorites, addFavorite, removeFavorite } =
-        usePlayerStore(); // Get functions to set current song index and manage favorites
+    const { setCurrentSongIndex, favorites } = usePlayerStore(); // Get functions to set current song index and manage favorites
 
     // Handle song click
     const handleSongClick = (index: number) => {
         setCurrentSongIndex(index); // Set the clicked song as the current song
-    };
-
-    // Handle favorite toggle
-    const handleFavoriteToggle = (index: number) => {
-        if (favorites.includes(index)) {
-            removeFavorite(index); // Remove from favorites
-        } else {
-            addFavorite(index); // Add to favorites
-        }
     };
 
     return (
@@ -45,16 +38,10 @@ const SongList: React.FC = () => {
                             <p>{song.artist}</p>
                             <span>{formatDuration(song.duration)}</span>
                         </div>
-                        <button
-                            className="favorite-button"
-                            onClick={(e) => {
-                                e.stopPropagation(); // Prevent triggering the song click
-                                handleFavoriteToggle(index);
-                            }}
-                        >
-                            {favorites.includes(index) ? "❤️" : "🤍"}{" "}
-                            {/* Show filled heart if favorite */}
-                        </button>
+                        <FavoriteButton
+                            index={index}
+                            isFavorite={favorites.includes(index)} // Pass favorite status
+                        />
                     </li>
                 ))}
             </ul>

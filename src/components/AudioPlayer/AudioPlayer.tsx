@@ -1,7 +1,9 @@
 // src/components/AudioPlayer/AudioPlayer.tsx
+
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store"; // Import the Zustand store
 import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
+import FavoriteButton from "../FavoriteButton/FavoriteButton"; // Import the FavoriteButton component
 import "./AudioPlayer.css";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -19,6 +21,7 @@ const AudioPlayer: React.FC = () => {
         setVolume,
         currentSongDuration,
         setCurrentSongDuration,
+        favorites,
     } = usePlayerStore();
 
     // Use custom hook to fetch songs
@@ -93,6 +96,7 @@ const AudioPlayer: React.FC = () => {
                     />
                     <h2>{songs[currentSongIndex].title}</h2>
                     <p>{songs[currentSongIndex].artist}</p>
+
                     <div className="duration">
                         <span className="current-time">
                             {formatDuration(currentTime)}{" "}
@@ -130,6 +134,11 @@ const AudioPlayer: React.FC = () => {
                 <button className="next-button" onClick={handleNextSong}>
                     ⏭️
                 </button>
+                {/* Favorite Button */}
+                <FavoriteButton
+                    index={currentSongIndex}
+                    isFavorite={favorites.includes(currentSongIndex)} // Check if current song is a favorite
+                />
             </div>
 
             <div className="volume-control">
