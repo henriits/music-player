@@ -1,6 +1,7 @@
 // src/components/AudioPlayer/AudioPlayer.tsx
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store"; // Import the Zustand store
+import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
 import "./AudioPlayer.css";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -9,11 +10,16 @@ const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
-    const [duration, setDuration] = useState(0);
 
     // Use Zustand store
-    const { currentSongIndex, setCurrentSongIndex, volume, setVolume } =
-        usePlayerStore();
+    const {
+        currentSongIndex,
+        setCurrentSongIndex,
+        volume,
+        setVolume,
+        currentSongDuration,
+        setCurrentSongDuration,
+    } = usePlayerStore();
 
     // Use custom hook to fetch songs
     const { songs, loading, error } = useFetchSongs();
@@ -48,7 +54,8 @@ const AudioPlayer: React.FC = () => {
     // Set duration once the metadata (such as duration) is loaded
     const handleLoadedMetadata = () => {
         if (audioRef.current) {
-            setDuration(audioRef.current.duration);
+            const duration = audioRef.current.duration;
+            setCurrentSongDuration(duration); // Set the duration in the Zustand store
         }
     };
 
@@ -88,13 +95,14 @@ const AudioPlayer: React.FC = () => {
                     <p>{songs[currentSongIndex].artist}</p>
                     <div className="duration">
                         <span className="current-time">
-                            {Math.floor(currentTime)}
+                            {formatDuration(currentTime)}{" "}
+                            {/* Use the utility function */}
                         </span>
                         <input
                             type="range"
                             className="progress-bar"
                             min="0"
-                            max={duration}
+                            max={currentSongDuration}
                             value={currentTime}
                             onChange={(e) => {
                                 const newTime = Number(e.target.value);
@@ -105,7 +113,8 @@ const AudioPlayer: React.FC = () => {
                             }} // Handle progress bar changes
                         />
                         <span className="total-time">
-                            {Math.floor(duration)}
+                            {formatDuration(currentSongDuration)}{" "}
+                            {/* Use the utility function */}
                         </span>
                     </div>
                 </div>

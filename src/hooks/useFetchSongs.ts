@@ -1,12 +1,10 @@
-// src/hooks/useFetchSongs.ts
-
 import { useEffect, useState } from "react";
 
 interface Song {
     title: string;
     artist: string;
     cover: string;
-    duration: string;
+    duration: number; // Duration in seconds
     file: string;
 }
 
@@ -23,9 +21,14 @@ const useFetchSongs = () => {
                     throw new Error("Network response was not ok");
                 }
                 const data = await response.json();
-                setSongs(data);
+                const songsWithDuration = await Promise.all(
+                    data.map(async (song: Song) => {
+                        const duration = await getAudioDuration(song.file);
+                        return { ...song, duration };
+                    })
+                );
+                setSongs(songsWithDuration);
             } catch (err) {
-                // Type assertion to handle error as an instance of Error
                 const error = err as Error;
                 setError(error.message);
             } finally {
@@ -35,6 +38,17 @@ const useFetchSongs = () => {
 
         fetchSongs();
     }, []);
+
+    // Function to fetch audio duration
+    const getAudioDuration = (file: string): Promise<number> => {
+        return new Promise((resolve) => {
+            const audio = new Audio(file);
+            audio.addEventListener("loadedmetadata", () => {
+                resolve(audio.duration);
+            });
+            audio.load(); // Start loading the audio to get metadata
+        });
+    };
 
     return { songs, loading, error };
 };
