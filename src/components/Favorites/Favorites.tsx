@@ -1,4 +1,4 @@
-import "./Favourites.css";
+import "./Favorites.css";
 
 const Favourites = () => {
     return (

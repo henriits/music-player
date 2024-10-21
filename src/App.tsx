@@ -3,7 +3,7 @@ import "./App.css";
 import "./Responsive.css";
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 import SongList from "./components/SongList/SongList";
-import Favourites from "./components/Favourites/Favourites";
+import Favourites from "./components/Favorites/Favorites";
 
 const App: React.FC = () => {
     return (

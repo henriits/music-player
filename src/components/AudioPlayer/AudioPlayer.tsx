@@ -1,4 +1,6 @@
+// src/components/AudioPlayer/AudioPlayer.tsx
 import useFetchSongs from "@/hooks/useFetchSongs";
+import usePlayerStore from "@/store/store"; // Import the Zustand store
 import "./AudioPlayer.css";
 
 import React, { useRef, useState, useEffect } from "react";
@@ -8,26 +10,21 @@ const AudioPlayer: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(false);
     const [currentTime, setCurrentTime] = useState(0);
     const [duration, setDuration] = useState(0);
-    const [volume, setVolume] = useState(80);
-    const [currentSongIndex, setCurrentSongIndex] = useState(0);
+
+    // Use Zustand store
+    const { currentSongIndex, setCurrentSongIndex, volume, setVolume } =
+        usePlayerStore();
 
     // Use custom hook to fetch songs
     const { songs, loading, error } = useFetchSongs();
 
     useEffect(() => {
         if (songs.length > 0 && audioRef.current) {
-            audioRef.current.src = songs[0].file; // Set the source to the first song
+            audioRef.current.src = songs[currentSongIndex].file; // Set the source to the current song
+            audioRef.current.play(); // Start playing the new song immediately
+            setIsPlaying(true); // Update the playing state
         }
-    }, [songs]);
-
-    // Update the audio source when the song changes
-    useEffect(() => {
-        if (audioRef.current && songs.length > 0) {
-            audioRef.current.src = songs[currentSongIndex].file;
-            audioRef.current.play();
-            setIsPlaying(true);
-        }
-    }, [currentSongIndex, songs]);
+    }, [songs, currentSongIndex]);
 
     // Play/pause function
     const togglePlayPause = () => {
@@ -64,24 +61,16 @@ const AudioPlayer: React.FC = () => {
         }
     };
 
-    // Handle progress bar change to update current time
-    const handleProgressChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newTime = Number(e.target.value);
-        setCurrentTime(newTime); // Update current time state
-        if (audioRef.current) {
-            audioRef.current.currentTime = newTime; // Update audio's current time
-        }
-    };
-
     // Change song to next or previous
     const handleNextSong = () => {
-        setCurrentSongIndex((prevIndex) => (prevIndex + 1) % songs.length);
+        const nextIndex = (currentSongIndex + 1) % songs.length; // Calculate the next index
+        setCurrentSongIndex(nextIndex); // Set the new index
     };
 
     const handlePrevSong = () => {
-        setCurrentSongIndex((prevIndex) =>
-            prevIndex === 0 ? songs.length - 1 : prevIndex - 1
-        );
+        const prevIndex =
+            currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1; // Calculate the previous index
+        setCurrentSongIndex(prevIndex); // Set the new index
     };
 
     return (
@@ -107,7 +96,13 @@ const AudioPlayer: React.FC = () => {
                             min="0"
                             max={duration}
                             value={currentTime}
-                            onChange={handleProgressChange} // Handle progress bar changes
+                            onChange={(e) => {
+                                const newTime = Number(e.target.value);
+                                setCurrentTime(newTime); // Update current time state
+                                if (audioRef.current) {
+                                    audioRef.current.currentTime = newTime; // Update audio's current time
+                                }
+                            }} // Handle progress bar changes
                         />
                         <span className="total-time">
                             {Math.floor(duration)}
@@ -126,7 +121,6 @@ const AudioPlayer: React.FC = () => {
                 <button className="next-button" onClick={handleNextSong}>
                     ⏭️
                 </button>
-                <button className="favorite-button player-favorite">❤️</button>
             </div>
 
             <div className="volume-control">
