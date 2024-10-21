@@ -1,3 +1,4 @@
+// src/store/store.ts
 import { create } from "zustand";
 
 interface PlayerState {
@@ -12,23 +13,35 @@ interface PlayerState {
     removeFavorite: (index: number) => void; // Remove favorite
 }
 
-const usePlayerStore = create<PlayerState>((set) => ({
-    currentSongIndex: 0,
-    setCurrentSongIndex: (index) => set({ currentSongIndex: index }),
-    volume: 50,
-    setVolume: (volume) => set({ volume }),
-    currentSongDuration: 0,
-    setCurrentSongDuration: (duration) =>
-        set({ currentSongDuration: duration }),
-    favorites: [],
-    addFavorite: (index) =>
-        set((state) => ({
-            favorites: [...state.favorites, index],
-        })),
-    removeFavorite: (index) =>
-        set((state) => ({
-            favorites: state.favorites.filter((i) => i !== index),
-        })),
-}));
+const usePlayerStore = create<PlayerState>((set) => {
+    const storedFavorites = JSON.parse(
+        localStorage.getItem("favorites") || "[]"
+    );
+
+    return {
+        currentSongIndex: 0,
+        setCurrentSongIndex: (index) => set({ currentSongIndex: index }),
+        volume: 50,
+        setVolume: (volume) => set({ volume }),
+        currentSongDuration: 0,
+        setCurrentSongDuration: (duration) =>
+            set({ currentSongDuration: duration }),
+        favorites: storedFavorites,
+        addFavorite: (index) => {
+            set((state) => {
+                const newFavorites = [...state.favorites, index];
+                localStorage.setItem("favorites", JSON.stringify(newFavorites)); // Update localStorage
+                return { favorites: newFavorites };
+            });
+        },
+        removeFavorite: (index) => {
+            set((state) => {
+                const newFavorites = state.favorites.filter((i) => i !== index);
+                localStorage.setItem("favorites", JSON.stringify(newFavorites)); // Update localStorage
+                return { favorites: newFavorites };
+            });
+        },
+    };
+});
 
 export default usePlayerStore;

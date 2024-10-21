@@ -1,24 +1,38 @@
-import React from "react";
-import useFetchSongs from "../../hooks/useFetchSongs"; // Import your custom hook
+// src/components/Favorites/Favorites.tsx
+
+import "./Favorites.css";
+import useFetchSongs from "@/hooks/useFetchSongs"; // Import your custom hook
 import usePlayerStore from "@/store/store"; // Import Zustand store
 import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
-import "./Favorites.css";
 
-const Favorites: React.FC = () => {
-    const { songs } = useFetchSongs(); // Use custom hook to fetch songs
-    const { favorites, removeFavorite } = usePlayerStore(); // Get favorites and remove function from store
+const Favorites = () => {
+    const { songs, loading, error } = useFetchSongs(); // Use custom hook to get songs
+    const { favorites, setCurrentSongIndex, removeFavorite } = usePlayerStore(); // Get favorites and functions from Zustand store
+
+    // Handle song click
+    const handleSongClick = (index: number) => {
+        setCurrentSongIndex(index); // Set the clicked song as the current song
+    };
 
     return (
         <div className="favorites-section">
             <h3>Favorites</h3>
-            {favorites.length === 0 ? (
-                <p>No favorites yet!</p>
-            ) : (
-                <ul>
-                    {favorites.map((index) => {
-                        const song = songs[index]; // Get the song based on the index
+            {loading && <p>Loading songs...</p>} {/* Loading state */}
+            {error && <p>Error fetching songs: {error}</p>} {/* Error state */}
+            <ul>
+                {favorites.length === 0 ? (
+                    <li>No favorites yet.</li>
+                ) : (
+                    favorites.map((index) => {
+                        const song = songs[index]; // Get the song using the index
+                        if (!song) return null; // Check if the song exists
+
                         return (
-                            <li key={index} className="song-item">
+                            <li
+                                key={index}
+                                className="song-item"
+                                onClick={() => handleSongClick(index)} // Add click handler
+                            >
                                 <img
                                     src={song.cover}
                                     alt={`${song.title} cover`}
@@ -27,19 +41,25 @@ const Favorites: React.FC = () => {
                                 <div className="song-info">
                                     <h4>{song.title}</h4>
                                     <p>{song.artist}</p>
-                                    <span>{formatDuration(song.duration)}</span>
+                                    <span>
+                                        {formatDuration(song.duration)}
+                                    </span>{" "}
+                                    {/* Use formatDuration */}
                                 </div>
                                 <button
                                     className="remove-favorite-button"
-                                    onClick={() => removeFavorite(index)} // Remove from favorites
+                                    onClick={(e) => {
+                                        e.stopPropagation(); // Prevent triggering the song click
+                                        removeFavorite(index); // Remove favorite
+                                    }}
                                 >
                                     ❌
                                 </button>
                             </li>
                         );
-                    })}
-                </ul>
-            )}
+                    })
+                )}
+            </ul>
         </div>
     );
 };
