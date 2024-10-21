@@ -1,11 +1,14 @@
 .all-songs {
     background-color: #1e1e1e;
-    padding: 15px;
-    border-radius: 15px;
+    padding: 15px; /* Reduced padding */
+    border-radius: 10px;
     margin: 10px;
     flex-grow: 1;
-    width: calc(50% - 20px);
+    width: calc(100% - 40px); /* Adjust width for modal */
     box-sizing: border-box;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+    max-height: 500px; /* Set a max height for scrolling */
+    overflow-y: auto; /* Enable vertical scrolling */
 }
 
 .all-songs ul {
@@ -17,17 +20,22 @@
     display: flex;
     align-items: center;
     background-color: #333;
-    padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 5px;
-    position: relative;
+    padding: 10px; /* Reduced padding */
+    margin-bottom: 8px; /* Reduced margin */
+    border-radius: 8px;
+    transition: background-color 0.3s ease;
+    font-size: 0.9em; /* Smaller font size */
+}
+
+.song-item:hover {
+    background-color: #444; /* Change on hover */
 }
 
 .song-cover {
-    width: 50px;
-    height: 50px;
+    width: 40px; /* Smaller cover */
+    height: 40px; /* Smaller cover */
     border-radius: 5px;
-    margin-right: 10px;
+    margin-right: 10px; /* Reduced margin */
 }
 
 .song-info {
@@ -38,12 +46,9 @@
     background: none;
     border: none;
     color: red;
-    font-size: 1.5em;
+    font-size: 1.2em; /* Smaller button */
     cursor: pointer;
-    margin-left: 10px;
     transition: transform 0.2s;
-    position: absolute;
-    right: 40px;
 }
 
 .favorite-button:hover {

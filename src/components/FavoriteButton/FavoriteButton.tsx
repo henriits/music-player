@@ -1,11 +1,10 @@
-// src/components/FavoriteButton/FavoriteButton.tsx
-
 import React from "react";
 import usePlayerStore from "@/store/store"; // Import Zustand store
 
 interface FavoriteButtonProps {
-    index: number; // Index of the song
-    isFavorite: boolean; // Whether the song is a favorite
+    index: number;
+    isFavorite: boolean;
+    className?: string;
 }
 
 const FavoriteButton: React.FC<FavoriteButtonProps> = ({

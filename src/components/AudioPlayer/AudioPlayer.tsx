@@ -1,10 +1,9 @@
-// src/components/AudioPlayer/AudioPlayer.tsx
-
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store"; // Import the Zustand store
 import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
 import FavoriteButton from "../FavoriteButton/FavoriteButton"; // Import the FavoriteButton component
 import "./AudioPlayer.css";
+import { FaVolumeUp } from "react-icons/fa";
 
 import React, { useRef, useState, useEffect } from "react";
 
@@ -134,23 +133,26 @@ const AudioPlayer: React.FC = () => {
                 <button className="next-button" onClick={handleNextSong}>
                     ⏭️
                 </button>
-                {/* Favorite Button */}
+            </div>
+
+            <div className="volume-favorite-container">
+                <div className="volume-control">
+                    <label htmlFor="volume" className="volume-label">
+                        <FaVolumeUp />
+                    </label>
+                    <input
+                        type="range"
+                        id="volume"
+                        name="volume"
+                        min="0"
+                        max="100"
+                        value={volume}
+                        onChange={handleVolumeChange} // Handle volume changes
+                    />
+                </div>
                 <FavoriteButton
                     index={currentSongIndex}
                     isFavorite={favorites.includes(currentSongIndex)} // Check if current song is a favorite
-                />
-            </div>
-
-            <div className="volume-control">
-                <label htmlFor="volume">Volume</label>
-                <input
-                    type="range"
-                    id="volume"
-                    name="volume"
-                    min="0"
-                    max="100"
-                    value={volume}
-                    onChange={handleVolumeChange} // Handle volume changes
                 />
             </div>
 
