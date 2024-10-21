@@ -1,13 +1,13 @@
 .favorites-section {
     background-color: #1e1e1e;
-    padding: 15px; /* Reduced padding */
+    padding: 15px;
     border-radius: 10px;
     margin: 10px;
     flex-grow: 1;
-    width: calc(100% - 40px); /* Adjust width for modal */
+    width: calc(100% - 40px);
     box-sizing: border-box;
-    max-height: 500px; /* Set a max height for scrolling */
-    overflow-y: auto; /* Enable vertical scrolling */
+    max-height: 500px;
+    overflow-y: auto;
 }
 
 .favorites-section ul {
@@ -19,22 +19,23 @@
     display: flex;
     align-items: center;
     background-color: #333;
-    padding: 10px; /* Reduced padding */
-    margin-bottom: 8px; /* Reduced margin */
+    padding: 10px;
+    margin-bottom: 8px;
     border-radius: 8px;
     transition: background-color 0.3s ease;
-    font-size: 0.9em; /* Smaller font size */
+    font-size: 0.9em;
+    cursor: pointer;
 }
 
 .song-item:hover {
-    background-color: #444; /* Change on hover */
+    background-color: #444;
 }
 
 .song-cover {
-    width: 40px; /* Smaller cover */
-    height: 40px; /* Smaller cover */
+    width: 40px;
+    height: 40px;
     border-radius: 5px;
-    margin-right: 10px; /* Reduced margin */
+    margin-right: 10px;
 }
 
 .song-info {
@@ -45,7 +46,7 @@
     background: none;
     border: none;
     color: red;
-    font-size: 1.2em; /* Smaller button */
+    font-size: 1.2em;
     cursor: pointer;
     transition: transform 0.2s;
 }

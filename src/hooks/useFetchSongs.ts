@@ -4,7 +4,7 @@ interface Song {
     title: string;
     artist: string;
     cover: string;
-    duration: number; // Duration in seconds
+    duration: number;
     file: string;
 }
 

@@ -1,11 +1,16 @@
-import useFetchSongs from "@/hooks/useFetchSongs";
-import usePlayerStore from "@/store/store"; // Import the Zustand store
-import { formatDuration } from "@/utils/durationUtils"; // Import the utility function
-import FavoriteButton from "../FavoriteButton/FavoriteButton"; // Import the FavoriteButton component
-import "./AudioPlayer.css";
-import { FaVolumeUp } from "react-icons/fa";
-
+import {
+    FaPlay,
+    FaPause,
+    FaBackward,
+    FaForward,
+    FaVolumeUp,
+} from "react-icons/fa";
 import React, { useRef, useState, useEffect } from "react";
+import useFetchSongs from "@/hooks/useFetchSongs";
+import usePlayerStore from "@/store/store";
+import { formatDuration } from "@/utils/durationUtils";
+import FavoriteButton from "../FavoriteButton/FavoriteButton";
+import "./AudioPlayer.css";
 
 const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
@@ -28,13 +33,12 @@ const AudioPlayer: React.FC = () => {
 
     useEffect(() => {
         if (songs.length > 0 && audioRef.current) {
-            audioRef.current.src = songs[currentSongIndex].file; // Set the source to the current song
+            audioRef.current.src = songs[currentSongIndex].file;
             audioRef.current.play(); // Start playing the new song immediately
             setIsPlaying(true); // Update the playing state
         }
     }, [songs, currentSongIndex]);
 
-    // Play/pause function
     const togglePlayPause = () => {
         if (audioRef.current) {
             if (isPlaying) {
@@ -46,14 +50,12 @@ const AudioPlayer: React.FC = () => {
         }
     };
 
-    // Update current time as the song progresses
     const handleTimeUpdate = () => {
         if (audioRef.current) {
             setCurrentTime(audioRef.current.currentTime);
         }
     };
 
-    // Set duration once the metadata (such as duration) is loaded
     const handleLoadedMetadata = () => {
         if (audioRef.current) {
             const duration = audioRef.current.duration;
@@ -61,7 +63,6 @@ const AudioPlayer: React.FC = () => {
         }
     };
 
-    // Handle volume change
     const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
         const newVolume = Number(e.target.value);
         setVolume(newVolume);
@@ -70,16 +71,15 @@ const AudioPlayer: React.FC = () => {
         }
     };
 
-    // Change song to next or previous
     const handleNextSong = () => {
-        const nextIndex = (currentSongIndex + 1) % songs.length; // Calculate the next index
-        setCurrentSongIndex(nextIndex); // Set the new index
+        const nextIndex = (currentSongIndex + 1) % songs.length;
+        setCurrentSongIndex(nextIndex);
     };
 
     const handlePrevSong = () => {
         const prevIndex =
-            currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1; // Calculate the previous index
-        setCurrentSongIndex(prevIndex); // Set the new index
+            currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
+        setCurrentSongIndex(prevIndex);
     };
 
     return (
@@ -98,8 +98,7 @@ const AudioPlayer: React.FC = () => {
 
                     <div className="duration">
                         <span className="current-time">
-                            {formatDuration(currentTime)}{" "}
-                            {/* Use the utility function */}
+                            {formatDuration(currentTime)}
                         </span>
                         <input
                             type="range"
@@ -109,15 +108,14 @@ const AudioPlayer: React.FC = () => {
                             value={currentTime}
                             onChange={(e) => {
                                 const newTime = Number(e.target.value);
-                                setCurrentTime(newTime); // Update current time state
+                                setCurrentTime(newTime);
                                 if (audioRef.current) {
-                                    audioRef.current.currentTime = newTime; // Update audio's current time
+                                    audioRef.current.currentTime = newTime;
                                 }
-                            }} // Handle progress bar changes
+                            }}
                         />
                         <span className="total-time">
-                            {formatDuration(currentSongDuration)}{" "}
-                            {/* Use the utility function */}
+                            {formatDuration(currentSongDuration)}
                         </span>
                     </div>
                 </div>
@@ -125,21 +123,18 @@ const AudioPlayer: React.FC = () => {
 
             <div className="controls">
                 <button className="prev-button" onClick={handlePrevSong}>
-                    ⏮️
+                    <FaBackward size={30} />
                 </button>
                 <button className="play-button" onClick={togglePlayPause}>
-                    {isPlaying ? "⏸️" : "▶️"}
+                    {isPlaying ? <FaPause size={30} /> : <FaPlay size={30} />}
                 </button>
                 <button className="next-button" onClick={handleNextSong}>
-                    ⏭️
+                    <FaForward size={30} />
                 </button>
             </div>
-
             <div className="volume-favorite-container">
                 <div className="volume-control">
-                    <label htmlFor="volume" className="volume-label">
-                        <FaVolumeUp />
-                    </label>
+                    <FaVolumeUp size={30} />
                     <input
                         type="range"
                         id="volume"
@@ -147,7 +142,7 @@ const AudioPlayer: React.FC = () => {
                         min="0"
                         max="100"
                         value={volume}
-                        onChange={handleVolumeChange} // Handle volume changes
+                        onChange={handleVolumeChange}
                     />
                 </div>
                 <FavoriteButton
@@ -156,11 +151,10 @@ const AudioPlayer: React.FC = () => {
                 />
             </div>
 
-            {/* Audio element to play the local music */}
             <audio
                 ref={audioRef}
-                onTimeUpdate={handleTimeUpdate} // Updates the current time as the song plays
-                onLoadedMetadata={handleLoadedMetadata} // Sets the song duration
+                onTimeUpdate={handleTimeUpdate}
+                onLoadedMetadata={handleLoadedMetadata}
             ></audio>
         </div>
     );

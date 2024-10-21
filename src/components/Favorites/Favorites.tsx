@@ -1,5 +1,3 @@
-// src/components/Favorites/Favorites.tsx
-
 import "./Favorites.css";
 import useFetchSongs from "@/hooks/useFetchSongs"; // Import your custom hook
 import usePlayerStore from "@/store/store"; // Import Zustand store
@@ -16,7 +14,6 @@ const Favorites = () => {
 
     return (
         <div className="favorites-section">
-            <h3>Favorites</h3>
             {loading && <p>Loading songs...</p>} {/* Loading state */}
             {error && <p>Error fetching songs: {error}</p>} {/* Error state */}
             <ul>

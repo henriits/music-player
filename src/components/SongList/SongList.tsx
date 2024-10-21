@@ -18,7 +18,6 @@ const SongList: React.FC = () => {
 
     return (
         <div className="all-songs">
-            <h3>All Songs</h3>
             {loading && <p>Loading songs...</p>}
             {error && <p>Error fetching songs: {error}</p>}
             <ul>

@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import "./App.css";
-import "./Responsive.css";
 import AudioPlayer from "./components/AudioPlayer/AudioPlayer";
 import SongList from "./components/SongList/SongList";
 import Favourites from "./components/Favorites/Favorites";

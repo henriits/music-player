@@ -1,5 +1,5 @@
 import React from "react";
-import usePlayerStore from "@/store/store"; // Import Zustand store
+import usePlayerStore from "@/store/store";
 
 interface FavoriteButtonProps {
     index: number;
@@ -13,7 +13,6 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 }) => {
     const { addFavorite, removeFavorite } = usePlayerStore(); // Get favorite functions from Zustand store
 
-    // Handle favorite toggle
     const handleFavoriteToggle = (e: React.MouseEvent) => {
         e.stopPropagation(); // Prevent triggering the song click
         if (isFavorite) {
@@ -25,7 +24,7 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
 
     return (
         <button className="favorite-button" onClick={handleFavoriteToggle}>
-            {isFavorite ? "❤️" : "🤍"} {/* Show filled heart if favorite */}
+            {isFavorite ? "❤️" : "🤍"}
         </button>
     );
 };

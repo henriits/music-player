@@ -1,4 +1,3 @@
-// src/store/store.ts
 import { create } from "zustand";
 
 interface PlayerState {
@@ -8,9 +7,9 @@ interface PlayerState {
     setVolume: (volume: number) => void;
     currentSongDuration: number;
     setCurrentSongDuration: (duration: number) => void;
-    favorites: number[]; // Array of song indexes that are favorites
-    addFavorite: (index: number) => void; // Add favorite
-    removeFavorite: (index: number) => void; // Remove favorite
+    favorites: number[];
+    addFavorite: (index: number) => void;
+    removeFavorite: (index: number) => void;
 }
 
 const usePlayerStore = create<PlayerState>((set) => {
@@ -30,14 +29,14 @@ const usePlayerStore = create<PlayerState>((set) => {
         addFavorite: (index) => {
             set((state) => {
                 const newFavorites = [...state.favorites, index];
-                localStorage.setItem("favorites", JSON.stringify(newFavorites)); // Update localStorage
+                localStorage.setItem("favorites", JSON.stringify(newFavorites));
                 return { favorites: newFavorites };
             });
         },
         removeFavorite: (index) => {
             set((state) => {
                 const newFavorites = state.favorites.filter((i) => i !== index);
-                localStorage.setItem("favorites", JSON.stringify(newFavorites)); // Update localStorage
+                localStorage.setItem("favorites", JSON.stringify(newFavorites));
                 return { favorites: newFavorites };
             });
         },
