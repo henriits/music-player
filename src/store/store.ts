@@ -10,6 +10,12 @@ interface PlayerState {
     favorites: number[];
     addFavorite: (index: number) => void;
     removeFavorite: (index: number) => void;
+
+    // Modal state for Song List and Favorites
+    isSongListOpen: boolean;
+    isFavoritesOpen: boolean;
+    toggleSongListModal: () => void;
+    toggleFavoritesModal: () => void;
 }
 
 const usePlayerStore = create<PlayerState>((set) => {
@@ -40,6 +46,13 @@ const usePlayerStore = create<PlayerState>((set) => {
                 return { favorites: newFavorites };
             });
         },
+        // Modal management
+        isSongListOpen: false,
+        isFavoritesOpen: false,
+        toggleSongListModal: () =>
+            set((state) => ({ isSongListOpen: !state.isSongListOpen })),
+        toggleFavoritesModal: () =>
+            set((state) => ({ isFavoritesOpen: !state.isFavoritesOpen })),
     };
 });
 
