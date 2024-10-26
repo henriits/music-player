@@ -5,7 +5,7 @@ import {
     FaForward,
     FaVolumeUp,
 } from "react-icons/fa";
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store";
 import { formatDuration } from "@/utils/durationUtils";
@@ -17,6 +17,7 @@ import "./AudioPlayer.css";
 
 const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
+    const [hasUserInteracted, setHasUserInteracted] = useState(false); // Track user interaction
 
     const {
         currentSongIndex,
@@ -40,21 +41,21 @@ const AudioPlayer: React.FC = () => {
 
     useEffect(() => {
         if (songs.length > 0 && audioRef.current) {
+            // Set the audio source but do not play automatically on load
             audioRef.current.src = songs[currentSongIndex].file;
-            if (isPlaying) {
-                audioRef.current
-                    .play()
-                    .catch((error) => console.log("Playback failed:", error));
+            if (hasUserInteracted) {
+                audioRef.current.play();
+                setIsPlaying(true);
             }
         }
-    }, [songs, currentSongIndex, isPlaying]);
+    }, [songs, currentSongIndex, setIsPlaying, hasUserInteracted]);
 
     const togglePlayPause = () => {
         if (audioRef.current) {
             if (isPlaying) {
                 audioRef.current.pause();
             } else {
-                audioRef.current.play();
+                setHasUserInteracted(true);
             }
             setIsPlaying(!isPlaying);
         }
@@ -81,11 +82,13 @@ const AudioPlayer: React.FC = () => {
     };
 
     const handleNextSong = () => {
+        setHasUserInteracted(true);
         const nextIndex = (currentSongIndex + 1) % songs.length;
         setCurrentSongIndex(nextIndex);
     };
 
     const handlePrevSong = () => {
+        setHasUserInteracted(true);
         const prevIndex =
             currentSongIndex === 0 ? songs.length - 1 : currentSongIndex - 1;
         setCurrentSongIndex(prevIndex);
