@@ -5,10 +5,12 @@ import { formatDuration } from "@/utils/durationUtils";
 
 const Favorites = () => {
     const { songs, loading, error } = useFetchSongs();
-    const { favorites, setCurrentSongIndex, removeFavorite } = usePlayerStore();
+    const { favorites, setCurrentSongIndex, removeFavorite, setIsPlaying } =
+        usePlayerStore(); // Import setIsPlaying
 
     const handleSongClick = (index: number) => {
         setCurrentSongIndex(index);
+        setIsPlaying(true); // Start playback when a favorite is clicked
     };
 
     return (

@@ -13,11 +13,12 @@ import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import Modal from "../Modal/Modal";
 import SongList from "../SongList/SongList";
 import Favorites from "../Favorites/Favorites";
+import ModalButtons from "../ModalButtons/ModalButtons";
 import "./AudioPlayer.css";
 
 const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [hasUserInteracted, setHasUserInteracted] = useState(false); // Track user interaction
+    const [hasUserInteracted, setHasUserInteracted] = useState(false);
 
     const {
         currentSongIndex,
@@ -49,6 +50,16 @@ const AudioPlayer: React.FC = () => {
             }
         }
     }, [songs, currentSongIndex, setIsPlaying, hasUserInteracted]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            if (isPlaying) {
+                audioRef.current.play();
+            } else {
+                audioRef.current.pause();
+            }
+        }
+    }, [isPlaying]);
 
     const togglePlayPause = () => {
         if (audioRef.current) {
@@ -167,15 +178,7 @@ const AudioPlayer: React.FC = () => {
                         isFavorite={favorites.includes(currentSongIndex)}
                     />
                 </div>
-
-                <div className="modal-buttons">
-                    <button onClick={toggleSongListModal}>
-                        Show Song List
-                    </button>
-                    <button onClick={toggleFavoritesModal}>
-                        Show Favorites
-                    </button>
-                </div>
+                <ModalButtons />
 
                 <div className="modal-container">
                     <Modal

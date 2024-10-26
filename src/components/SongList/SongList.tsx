@@ -1,3 +1,4 @@
+// SongList.tsx
 import React from "react";
 import useFetchSongs from "../../hooks/useFetchSongs";
 import usePlayerStore from "@/store/store";
@@ -7,10 +8,11 @@ import "./SongList.css";
 
 const SongList: React.FC = () => {
     const { songs, loading, error } = useFetchSongs();
-    const { setCurrentSongIndex, favorites } = usePlayerStore();
+    const { setCurrentSongIndex, setIsPlaying, favorites } = usePlayerStore(); // Import setIsPlaying
 
     const handleSongClick = (index: number) => {
         setCurrentSongIndex(index);
+        setIsPlaying(true); // Set isPlaying to true to start playback
     };
 
     return (
