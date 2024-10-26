@@ -10,9 +10,6 @@ import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store";
 import { formatDuration } from "@/utils/durationUtils";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
-import Modal from "../Modal/Modal";
-import SongList from "../SongList/SongList";
-import Favorites from "../Favorites/Favorites";
 import ModalButtons from "../ModalButtons/ModalButtons";
 import "./AudioPlayer.css";
 
@@ -28,10 +25,6 @@ const AudioPlayer: React.FC = () => {
         currentSongDuration,
         setCurrentSongDuration,
         favorites,
-        isSongListOpen,
-        isFavoritesOpen,
-        toggleSongListModal,
-        toggleFavoritesModal,
         isPlaying,
         setIsPlaying,
         currentTime,
@@ -179,24 +172,6 @@ const AudioPlayer: React.FC = () => {
                     />
                 </div>
                 <ModalButtons />
-
-                <div className="modal-container">
-                    <Modal
-                        isOpen={isSongListOpen}
-                        onClose={toggleSongListModal}
-                    >
-                        <h2>Song List</h2>
-                        <SongList />
-                    </Modal>
-
-                    <Modal
-                        isOpen={isFavoritesOpen}
-                        onClose={toggleFavoritesModal}
-                    >
-                        <h2>Favorites</h2>
-                        <Favorites />
-                    </Modal>
-                </div>
 
                 <audio
                     ref={audioRef}
