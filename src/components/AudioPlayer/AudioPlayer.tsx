@@ -55,7 +55,7 @@ const AudioPlayer: React.FC = () => {
             if (isPlaying) {
                 audioRef.current.pause();
             } else {
-                setHasUserInteracted(true);
+                audioRef.current.play();
             }
             setIsPlaying(!isPlaying);
         }

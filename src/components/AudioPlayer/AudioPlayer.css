@@ -14,7 +14,7 @@
     max-width: 400px;
     height: auto;
     border-radius: 10px;
-    margin-bottom: 10px;
+    padding-top: 10px;
 }
 
 .duration {
@@ -33,6 +33,7 @@
     flex-grow: 1;
     margin: 0 10px;
     height: 5px;
+    cursor: pointer;
 }
 
 .controls {
@@ -63,6 +64,7 @@
 
 .volume-control input[type="range"] {
     width: 120px;
+    cursor: pointer;
 }
 
 .volume-favorite-container {
@@ -70,6 +72,7 @@
     align-items: center;
     justify-content: space-around;
     margin-top: 20px;
+    padding-bottom: 10px;
 }
 .player-wrapper {
     display: flex;
