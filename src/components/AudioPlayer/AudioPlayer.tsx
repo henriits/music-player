@@ -5,20 +5,18 @@ import {
     FaForward,
     FaVolumeUp,
 } from "react-icons/fa";
-import React, { useRef, useState, useEffect } from "react";
+import React, { useRef, useEffect } from "react";
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store";
 import { formatDuration } from "@/utils/durationUtils";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import Modal from "../Modal/Modal";
 import SongList from "../SongList/SongList";
-import Favourites from "../Favorites/Favorites";
+import Favorites from "../Favorites/Favorites";
 import "./AudioPlayer.css";
 
 const AudioPlayer: React.FC = () => {
     const audioRef = useRef<HTMLAudioElement | null>(null);
-    const [isPlaying, setIsPlaying] = useState(false);
-    const [currentTime, setCurrentTime] = useState(0);
 
     const {
         currentSongIndex,
@@ -32,6 +30,10 @@ const AudioPlayer: React.FC = () => {
         isFavoritesOpen,
         toggleSongListModal,
         toggleFavoritesModal,
+        isPlaying,
+        setIsPlaying,
+        currentTime,
+        setCurrentTime,
     } = usePlayerStore();
 
     const { songs, loading, error } = useFetchSongs();
@@ -39,7 +41,6 @@ const AudioPlayer: React.FC = () => {
     useEffect(() => {
         if (songs.length > 0 && audioRef.current) {
             audioRef.current.src = songs[currentSongIndex].file;
-            // Only play if the user has already started playback
             if (isPlaying) {
                 audioRef.current
                     .play()
@@ -173,7 +174,6 @@ const AudioPlayer: React.FC = () => {
                     </button>
                 </div>
 
-                {/* Modal container */}
                 <div className="modal-container">
                     <Modal
                         isOpen={isSongListOpen}
@@ -188,7 +188,7 @@ const AudioPlayer: React.FC = () => {
                         onClose={toggleFavoritesModal}
                     >
                         <h2>Favorites</h2>
-                        <Favourites />
+                        <Favorites />
                     </Modal>
                 </div>
 

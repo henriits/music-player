@@ -11,14 +11,14 @@ const FavoriteButton: React.FC<FavoriteButtonProps> = ({
     index,
     isFavorite,
 }) => {
-    const { addFavorite, removeFavorite } = usePlayerStore(); // Get favorite functions from Zustand store
+    const { addFavorite, removeFavorite } = usePlayerStore();
 
     const handleFavoriteToggle = (e: React.MouseEvent) => {
-        e.stopPropagation(); // Prevent triggering the song click
+        e.stopPropagation();
         if (isFavorite) {
-            removeFavorite(index); // Remove from favorites
+            removeFavorite(index);
         } else {
-            addFavorite(index); // Add to favorites
+            addFavorite(index);
         }
     };
 
