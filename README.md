@@ -26,7 +26,7 @@ A simple audio player built with React and Zustand for state management. This ap
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/yourusername/audio-player.git
+    git clone https://github.com/henriits/music-player.git
     cd audio-player
     ```
 
