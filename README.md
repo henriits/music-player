@@ -29,7 +29,7 @@ Application is running live on Vercel : https://music-player-topaz-five.vercel.a
 
     ```bash
     git clone https://github.com/henriits/music-player.git
-    cd audio-player
+    cd music-player
     ```
 
 2. **Install dependencies**:
