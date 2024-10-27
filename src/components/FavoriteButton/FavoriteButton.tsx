@@ -1,5 +1,6 @@
 import React from "react";
 import usePlayerStore from "@/store/store";
+import "./FavoriteButton.css";
 
 interface FavoriteButtonProps {
     index: number;

@@ -3,6 +3,7 @@ import Modal from "../Modal/Modal";
 import SongList from "../SongList/SongList";
 import Favorites from "../Favorites/Favorites";
 import usePlayerStore from "@/store/store";
+import "./ModalButtons.css";
 
 const ModalButtons: React.FC = () => {
     const {
@@ -13,9 +14,11 @@ const ModalButtons: React.FC = () => {
     } = usePlayerStore();
 
     return (
-        <div className="modal-buttons">
-            <button onClick={toggleSongListModal}>Show Song List</button>
-            <button onClick={toggleFavoritesModal}>Show Favorites</button>
+        <div>
+            <div className="modal-buttons">
+                <button onClick={toggleSongListModal}>Show Song List</button>
+                <button onClick={toggleFavoritesModal}>Show Favorites</button>
+            </div>
 
             <Modal isOpen={isSongListOpen} onClose={toggleSongListModal}>
                 <h2>Song List</h2>

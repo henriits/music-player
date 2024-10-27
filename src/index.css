@@ -1,0 +1,32 @@
+/* For WebKit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+    width: 12px;
+    height: 12px;
+}
+
+::-webkit-scrollbar-track {
+    background: #161313;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #4caf50, #388e3c);
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+    transition: background 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #388e3c, #3e8e3c);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+}
+
+::-webkit-scrollbar:vertical {
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar:horizontal {
+    border-radius: 10px;
+}

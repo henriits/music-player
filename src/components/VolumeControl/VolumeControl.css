@@ -8,3 +8,28 @@
     width: 120px;
     cursor: pointer;
 }
+.volume-control {
+    display: flex;
+    align-items: center;
+}
+
+.volume-slider {
+    width: 100px;
+    accent-color: #4caf50;
+    margin-left: 10px;
+}
+
+.volume-button {
+    background: none;
+    border: none;
+    color: white;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+}
+
+.volume-button:hover {
+    transform: scale(1.2);
+}

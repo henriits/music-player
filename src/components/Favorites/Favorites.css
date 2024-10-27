@@ -43,10 +43,9 @@
 }
 
 .remove-favorite-button {
-    background: none;
-    border: none;
-    color: red;
+    background-color: transparent;
     font-size: 1.2em;
+    border: none;
     cursor: pointer;
     transition: transform 0.2s;
 }

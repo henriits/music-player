@@ -42,16 +42,3 @@
 .song-info {
     flex-grow: 1;
 }
-
-.favorite-button {
-    background: none;
-    border: none;
-    color: red;
-    font-size: 1.4em;
-    cursor: pointer;
-    transition: transform 0.2s;
-}
-
-.favorite-button:hover {
-    transform: scale(1.4);
-}

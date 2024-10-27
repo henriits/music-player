@@ -10,7 +10,6 @@ body {
 .music-player {
     display: flex;
     flex-direction: column;
-    padding: 20px;
     height: 100vh;
     box-sizing: border-box;
 }
