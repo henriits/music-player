@@ -94,11 +94,11 @@ A simple audio player built with React and Zustand for state management. This ap
 
 ## Preview Images
 
-![Screenshot 2024-10-27 135325](https://github.com/user-attachments/assets/9aafefda-c3ff-45bc-a497-d1014ed0dce3)
-![Screenshot 2024-10-27 135405](https://github.com/user-attachments/assets/d0eadaf7-7d5f-4f67-b50f-cfc9d19588c0)
-![Screenshot 2024-10-27 135429](https://github.com/user-attachments/assets/cd1347a6-1b5a-4128-9c34-46a08ef72ed9)
-![Screenshot 2024-10-27 135734](https://github.com/user-attachments/assets/2db95720-316d-4129-ac1d-3c36211505ba)
-![Screenshot 2024-10-27 135802](https://github.com/user-attachments/assets/8ae563a1-b7ec-4872-ba7a-f715b3c6fe34)
+![Screenshot 2024-10-27 140316](https://github.com/user-attachments/assets/3db39034-f29e-4751-96d8-e57eb205fd66)
+![Screenshot 2024-10-27 135405](https://github.com/user-attachments/assets/502dbb5b-788e-44ac-b39e-885ca7505255)
+![Screenshot 2024-10-27 135429](https://github.com/user-attachments/assets/3e05f43e-8f10-426c-a59b-1ed0d0abb54a)
+![Screenshot 2024-10-27 135734](https://github.com/user-attachments/assets/7f976f38-2c77-4348-8a82-30984ae0311f)
+![Screenshot 2024-10-27 135802](https://github.com/user-attachments/assets/d112efca-e540-4baa-8c15-54bcb302871b)
 
 ## Contributing
 
