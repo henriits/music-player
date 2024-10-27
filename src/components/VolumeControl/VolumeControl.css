@@ -1,0 +1,10 @@
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.volume-control input[type="range"] {
+    width: 120px;
+    cursor: pointer;
+}

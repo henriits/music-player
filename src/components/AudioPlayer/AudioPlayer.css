@@ -56,16 +56,7 @@
     transform: scale(1.2);
 }
 
-.volume-control {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-}
 
-.volume-control input[type="range"] {
-    width: 120px;
-    cursor: pointer;
-}
 
 .volume-favorite-container {
     display: flex;

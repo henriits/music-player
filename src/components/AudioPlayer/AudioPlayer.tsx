@@ -1,16 +1,11 @@
-import {
-    FaPlay,
-    FaPause,
-    FaBackward,
-    FaForward,
-    FaVolumeUp,
-} from "react-icons/fa";
+import { FaPlay, FaPause, FaBackward, FaForward } from "react-icons/fa";
 import React, { useRef, useEffect, useState } from "react";
 import useFetchSongs from "@/hooks/useFetchSongs";
 import usePlayerStore from "@/store/store";
 import { formatDuration } from "@/utils/durationUtils";
 import FavoriteButton from "../FavoriteButton/FavoriteButton";
 import ModalButtons from "../ModalButtons/ModalButtons";
+import VolumeControl from "../VolumeControl/VolumeControl";
 import "./AudioPlayer.css";
 
 const AudioPlayer: React.FC = () => {
@@ -20,8 +15,6 @@ const AudioPlayer: React.FC = () => {
     const {
         currentSongIndex,
         setCurrentSongIndex,
-        volume,
-        setVolume,
         currentSongDuration,
         setCurrentSongDuration,
         favorites,
@@ -29,13 +22,13 @@ const AudioPlayer: React.FC = () => {
         setIsPlaying,
         currentTime,
         setCurrentTime,
+        volume,
     } = usePlayerStore();
 
     const { songs, loading, error } = useFetchSongs();
 
     useEffect(() => {
         if (songs.length > 0 && audioRef.current) {
-            // Set the audio source but do not play automatically on load
             audioRef.current.src = songs[currentSongIndex].file;
             if (hasUserInteracted) {
                 audioRef.current.play();
@@ -53,6 +46,12 @@ const AudioPlayer: React.FC = () => {
             }
         }
     }, [isPlaying]);
+
+    useEffect(() => {
+        if (audioRef.current) {
+            audioRef.current.volume = volume / 100;
+        }
+    }, [volume]);
 
     const togglePlayPause = () => {
         if (audioRef.current) {
@@ -74,14 +73,6 @@ const AudioPlayer: React.FC = () => {
     const handleLoadedMetadata = () => {
         if (audioRef.current) {
             setCurrentSongDuration(audioRef.current.duration);
-        }
-    };
-
-    const handleVolumeChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-        const newVolume = Number(e.target.value);
-        setVolume(newVolume);
-        if (audioRef.current) {
-            audioRef.current.volume = newVolume / 100;
         }
     };
 
@@ -154,18 +145,7 @@ const AudioPlayer: React.FC = () => {
                     </button>
                 </div>
                 <div className="volume-favorite-container">
-                    <div className="volume-control">
-                        <FaVolumeUp size={30} />
-                        <input
-                            type="range"
-                            id="volume"
-                            name="volume"
-                            min="0"
-                            max="100"
-                            value={volume}
-                            onChange={handleVolumeChange}
-                        />
-                    </div>
+                    <VolumeControl />
                     <FavoriteButton
                         index={currentSongIndex}
                         isFavorite={favorites.includes(currentSongIndex)}
