@@ -9,6 +9,7 @@ A simple audio player built with React and Zustand for state management. This ap
 -   Display current song information (title, artist, album art)
 -   Progress bar for tracking song playback
 -   Favorites management: add or remove songs from favorites
+-   Favorites are stored in local storage for persistence
 -   Responsive design for optimal performance on different devices
 -   User-friendly interface
 
@@ -25,7 +26,7 @@ A simple audio player built with React and Zustand for state management. This ap
 1. **Clone the repository**:
 
     ```bash
-    git clone https://github.com/henriits/music-player.git
+    git clone https://github.com/yourusername/audio-player.git
     cd audio-player
     ```
 
@@ -49,6 +50,7 @@ A simple audio player built with React and Zustand for state management. This ap
 -   Use the play/pause button to control playback.
 -   Adjust the volume using the volume slider or click the volume icon to mute/unmute.
 -   Add songs to your favorites by clicking the favorite button.
+-   Your favorites will be saved in local storage, ensuring they persist even after refreshing the page.
 -   Navigate through your favorites or the song list using the provided modal buttons.
 
 ## Folder Structure
@@ -89,6 +91,14 @@ A simple audio player built with React and Zustand for state management. This ap
 |-- package.json
 |-- README.md
 ```
+
+## Preview Images
+
+![Screenshot 2024-10-27 135325](https://github.com/user-attachments/assets/9aafefda-c3ff-45bc-a497-d1014ed0dce3)
+![Screenshot 2024-10-27 135405](https://github.com/user-attachments/assets/d0eadaf7-7d5f-4f67-b50f-cfc9d19588c0)
+![Screenshot 2024-10-27 135429](https://github.com/user-attachments/assets/cd1347a6-1b5a-4128-9c34-46a08ef72ed9)
+![Screenshot 2024-10-27 135734](https://github.com/user-attachments/assets/2db95720-316d-4129-ac1d-3c36211505ba)
+![Screenshot 2024-10-27 135802](https://github.com/user-attachments/assets/8ae563a1-b7ec-4872-ba7a-f715b3c6fe34)
 
 ## Contributing
 
