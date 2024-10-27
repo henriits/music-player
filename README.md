@@ -2,6 +2,8 @@
 
 A simple audio player built with React and Zustand for state management. This application allows users to play, pause, skip, and manage their favorite songs, providing a smooth and enjoyable audio experience. The project is developed using TypeScript for type safety and better maintainability.
 
+Application is running live on Vercel : https://music-player-topaz-five.vercel.app/
+
 ## Features
 
 -   Play, pause, and skip songs
